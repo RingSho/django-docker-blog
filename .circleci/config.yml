@@ -61,10 +61,9 @@ jobs:
           name: "push container to registry.heroku.com"
           # Herokuへログインし，作成したイメージをPush,Releaseします．
           command: |
-            heroku login -u=_ -p ${HEROKU_AUTH_TOKEN} registry.heroku.com
-            heroku push registry.heroku.com/${HEROKU_APP_NAME}/web
-            heroku container:push web --app ${HEROKU_APP_NAME}
-            heroku container:release web --app ${HEROKU_APP_NAME}
+            git push https://heroku:$HEROKU_APP_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+            # heroku container:push web --app ${HEROKU_APP_NAME}
+            # heroku container:release web --app ${HEROKU_APP_NAME}
       - run:
           command: heroku run python manage.py migrate
       - run:
