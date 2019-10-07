@@ -61,7 +61,7 @@ jobs:
           name: "push container to registry.heroku.com"
           # Herokuへログインし，作成したイメージをPush,Releaseします．
           command: |
-            git push -f https://heroku:$HEROKU_APP_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+            git push https://heroku:$HEROKU_APP_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
       - run:
           name: heroku maintenance off
           command: heroku maintenance:off --app ${HEROKU_APP_NAME}
