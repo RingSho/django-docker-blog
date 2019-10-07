@@ -14,9 +14,9 @@ jobs:
       - run:
           name: sleep for waiting launch db
           command: sleep 1
-      - run:
-          name: docker-compose down
-          command: docker-compose down
+      # - run:
+      #     name: docker-compose down
+      #     command: docker-compose down
   deploy:
     machine:
       image: circleci/classic:edge
@@ -39,6 +39,9 @@ jobs:
             docker login --username=_ --password=68f98e9a-066c-4d40-8cd7-9cf797a14a1d registry.heroku.com
             docker push registry.heroku.com/blog884/web
             bash .circleci/heroku-container-release.sh
+      - run:
+          name: heroku maintenance off
+          command: heroku maintenance:off --app blog884
 workflows:
   version: 2
   build_and_deploy:
