@@ -61,8 +61,7 @@ jobs:
           name: "push container to registry.heroku.com"
           # Herokuへログインし，作成したイメージをPush,Releaseします．
           command: |
-            echo "$DOCKER_PASSWORD"
-            docker login --username=_ --password-stdin registry.heroku.com
+            docker login -u=_ -p ${HEROKU_AUTH_TOKEN} registry.heroku.com
             docker push registry.heroku.com/${HEROKU_APP_NAME}/web
             heroku container:push web --app ${HEROKU_APP_NAME}
             heroku container:release web --app ${HEROKU_APP_NAME}
